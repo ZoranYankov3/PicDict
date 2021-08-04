@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    background-color: #636165;
+    color: white;
+    padding: 7px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+
+/* .footer-wrapper {
+display: flex;
+justify-content: space-around
+}  */
+
+p {
+    margin: 0;
+    font-size: small;
+    color: #f7ce60;
+}

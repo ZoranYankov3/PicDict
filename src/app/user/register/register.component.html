@@ -1,0 +1,29 @@
+<div class="auth-container">
+    <h1>Register page</h1>
+    <form #form="ngForm" class="form-container" id="register-form" (ngSubmit)="registerSubmit(form)">
+        <!-- <div class="form-group">
+            <label htmlFor="email">Email</label>
+            <input type="email" class="form-control" placeholder="Email" name="email" value={this.state.email}/>
+        </div> -->
+        <div class="form-group">
+            <label class="form-label" htmlFor="username">Username</label>
+            <input type="username" class="form-control" placeholder="Username" name="username" ngModel>
+        </div>
+        <div class="form-group">
+            <label class="form-label" htmlFor="password">Password</label>
+            <input type="password" class="form-control" placeholder="Password" name="password" ngModel>
+        </div>
+        <!-- <Notificate type="error">{this.state.errors.password} <br /></Notificate> -->
+        <div class="form-group">
+            <label class="form-label" htmlFor="repeatPassword">Repeat Password</label>
+            <input type="password" class="form-control" placeholder="Repeat-Password" name="rePassword" ngModel>
+        </div>
+        <!-- <Notificate type="error">{this.state.errors.rePassword} <br /></Notificate> -->
+        <button class="btn">Register</button>
+        <app-notificate [notificate]="notificate"></app-notificate>
+        <div>
+            Already have an account?
+            <a routerLink="/auth/login"><span class="nav-a">Login now</span> </a>
+        </div>
+    </form>
+</div>
