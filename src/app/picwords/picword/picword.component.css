@@ -7,6 +7,14 @@
     height: fit-content;
 }
 
+.home-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+    width: 65rem;
+}
+
 .picword {
     display: flex;
     flex-direction: column;
@@ -40,10 +48,15 @@
     width: max-content;
     border-radius: 5px;
     padding: 5px 12px;
+    text-transform: capitalize;
 }
 
 .btn {
     border: none;
     margin: 10px;
     padding: 10px;
+}
+
+.picword-home {
+    width: 65rem;
 }

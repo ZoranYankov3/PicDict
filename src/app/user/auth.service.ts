@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';
 import { IRegResponse } from '../shared/interfaces/register-response-interface';
-import { ErrorService } from '../shared/services/error.service';
+import { HelpService } from '../shared/services/help.service';
 import { User } from './userModels/user.model';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class AuthService {
   constructor(
     private _config: ConfigService,
     private _http: HttpClient,
-    private _errorService: ErrorService,
+    private _errorService: HelpService,
     private _router: Router,
   ) { }
 
@@ -69,6 +69,14 @@ export class AuthService {
         })
       )
   }
+
+  getLoggedUserName(){
+    let cookie = localStorage.getItem('sid');
+    let {user} = cookie ? JSON.parse(cookie): {user: ''};
+    console.log(user);
+    return  user;
+  }
+
 
   getLoggedState(): Boolean {
     let storage = localStorage.getItem('sid');
