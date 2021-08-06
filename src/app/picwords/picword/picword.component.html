@@ -8,7 +8,7 @@
         </ng-template>
         <ng-template #findLink>
             <form #form="ngForm">
-                <div (click)="copyLink(pW)" class="picword-img">
+                <div (click)="copyLink(pW)" class="{{findStyle}}">
                     <img [src]="pW.pictureUrl" alt="food-pic">
                 </div>
                 <button (click)="copyLink(pW)" class="picword-name btn">COPY PEXEL</button>
