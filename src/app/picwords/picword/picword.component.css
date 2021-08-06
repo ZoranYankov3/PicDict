@@ -30,7 +30,7 @@
     height: 250px;
 }
 
-.picword-img .find img {
+.picword-wrapper .find img {
     cursor: pointer;
 }
 
