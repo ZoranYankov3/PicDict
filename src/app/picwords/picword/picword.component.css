@@ -49,6 +49,7 @@
     border-radius: 5px;
     padding: 5px 12px;
     text-transform: capitalize;
+    border: none;
 }
 
 .btn {

@@ -7,11 +7,11 @@
             <h5 class="picword-name">{{pW.word}}</h5>
         </ng-template>
         <ng-template #findLink>
-            <form #form="ngForm" (ngSubmit)="copyLink(pW)">
+            <form #form="ngForm">
                 <div class="picword-img">
-                    <img [src]="pW.pictureUrl" alt="food-pic">
+                    <img (click)="copyLink(pW)" [src]="pW.pictureUrl" alt="food-pic">
                 </div>
-                <button class="picword-name btn">COPY PEXEL</button>
+                <button (click)="copyLink(pW)" class="picword-name btn">COPY PEXEL</button>
             </form>
         </ng-template>
     </div>
