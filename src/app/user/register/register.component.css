@@ -31,24 +31,3 @@ p {
     font-size: 20px;
     font-style: italic;
 }
-
-.auth-container .btn {
-    /* position: relative; */
-    margin-right: 1rem;
-    text-decoration: none;
-    padding: 8px 13px;
-    /* background-color: rgb(44 151 202);
-    border-radius: 4px;
-    color: white; */
-    background-color: rgb(46 44 47);
-    border-radius: 4px;
-    color: #f6c95b;
-    border: 1px solid #521b52b0;
-    box-shadow: 1px 1px 3px 0px #757373;
-    margin: 20px;
-}
-
-.auth-container .btn:hover {
-    background-color: rgb(117 116 117);
-    color: #ffde8e;
-}

@@ -4,22 +4,23 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';
+import { StateService } from '../core/state.service';
 import { IRegResponse } from '../shared/interfaces/register-response-interface';
 import { HelpService } from '../shared/services/help.service';
 import { User } from './userModels/user.model';
 
 @Injectable()
 export class AuthService {
-
   currentUser = new BehaviorSubject<User | null>(null);
   constructor(
     private _config: ConfigService,
     private _http: HttpClient,
     private _errorService: HelpService,
     private _router: Router,
+    private _stateService: StateService
   ) { }
 
-  register(username: String, password: String) {
+  register(username: string, password: string) {
     // console.log('in client register');
     return this._http.post<IRegResponse>(this._config.SERVER_AUTH_URL('register'), { username: username, password: password })
       .pipe(
@@ -29,13 +30,13 @@ export class AuthService {
         }),
         tap(res => {
           console.log(res);
-          this.authenticateUser(res.user.username, res.token);
+          this.authenticateUser(res.user._id, res.user.username, res.token);
           this._router.navigateByUrl('');
         })
       )
   }
 
-  // verify(verifyData: { username: String, token: String }) {
+  // verify(verifyData: { username: string, token: string }) {
   //   // console.log('in client verify');
   //   return this._http.post<IRegResponse>(this._config.SERVER_AUTH_URL('verify'), verifyData)
   //     .pipe(
@@ -56,7 +57,7 @@ export class AuthService {
   //     )
   // }
 
-  login(username: String, password: String) {
+  login(username: string, password: string) {
     return this._http.post<IRegResponse>(this._config.SERVER_AUTH_URL('login'), { username, password })
       .pipe(
         catchError(err => {
@@ -64,33 +65,44 @@ export class AuthService {
           return this._errorService.handleError(err);
         }),
         tap(res => {
-          this.authenticateUser(res.user.username, res.token);
+          console.log(res);
+          console.log(res.user);
+
+          this.authenticateUser(res.user._id, res.user.username, res.token);
           this._router.navigateByUrl('');
         })
       )
   }
 
-  getLoggedUserName(){
+  getLoggedUserName() {
     let cookie = localStorage.getItem('sid');
-    let {user} = cookie ? JSON.parse(cookie): {user: ''};
+    let { user } = cookie ? JSON.parse(cookie) : { user: '' };
     console.log(user);
-    return  user;
+    // console.log(cookie);
+    return user;
   }
 
-
-  getLoggedState(): Boolean {
+  getLoggedUserId(): string {
+    let storage = localStorage.getItem('sid');
+    let currentStorage = storage ? JSON.parse(storage) : null;
+    let { _userId } = currentStorage || { _userId: null };
+    // console.log(_token);
+    return _userId;
+  }
+  
+  getLoggedUserToken = () => {
     let storage = localStorage.getItem('sid');
     let currentStorage = storage ? JSON.parse(storage) : null;
     let { _token } = currentStorage || { _token: null };
-    // console.log(_token);
     return _token;
   }
 
-  private authenticateUser(user: String, token: String) {
+  private authenticateUser(userId: string, user: string, token: string) {
     // const expirationDate = new Date(new Date().getTime() + expiresIn*1000);
-    const newUser = new User(user, token)
+    const newUser = new User(userId, user, token)
     // console.log(newUser);
     this.currentUser.next(newUser);
-    localStorage.setItem('sid', JSON.stringify(newUser))
+    localStorage.setItem('sid', JSON.stringify(newUser));
+    this._stateService.setState({isAuthName: user, isLogged: true, isAuthorized: true});
   }
 }

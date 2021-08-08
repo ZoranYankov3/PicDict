@@ -1,17 +1,43 @@
 <div class="profile-content">
-    <div class="profile-header">
-        <!-- <Image cloudName="softquizy" class="profile-animation" publicId='profile-page-logo' /> -->
-        <div class="profile-data">
-            <h1 class="profile-title">{{userName}}'s Page</h1>
-            <img class="profile-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHgwL4r2DN1qg91OOqIViiv0Uxw-9yqo-PiQ&usqp=CAU" alt="profile-logo">
-            <h6 class="profile-logo-title">Profile picture is comming up...</h6>
+    <ng-template [ngIf]="currentPWs.length == 0 && !loading" [ngIfElse]="userCreated">
+        <div class="profile-header">
+            <!-- <Image cloudName="softquizy" class="profile-animation" publicId='profile-page-logo' /> -->
+            <div class="profile-data">
+                <h1 class="profile-title">{{userName}}'s Page</h1>
+                <img class="profile-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHgwL4r2DN1qg91OOqIViiv0Uxw-9yqo-PiQ&usqp=CAU" alt="profile-logo">
+                <h6 class="profile-logo-title">Profile picture is comming up...</h6>
+            </div>
         </div>
-    </div>
-    <div class="profile-page-buttons">
-        PROFILE RESULTS BUTTON
-        <button class="button">isAuth's Results</button> PROFILE QUESTIONS BUTTON
-        <button class="button">isAuth's Questions</button>
-    </div>
+        <div class="profile-page-buttons">
+
+            <div class="btn-wrapper">
+                <!-- <p>PROFILE RESULTS</p> -->
+                <button class="btn">{{userName}}'s Results</button>
+            </div>
+            <div class="btn-wrapper">
+                <!-- <p>CREATED PICWORDS</p> -->
+                <button (click)="laodPws()" class="btn">{{userName}}'s PicWords</button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #userCreated class="profile-pws-wrapper">
+        <a href="/auth/profile" class="btn back-btn">Back to Profile Page</a>
+
+        <!--Variant 1-->
+        <!-- <a (click)="moreSubmit()" class="btn next-btn">Show more</a> -->
+
+        <h1 class="profile-title picwords">{{userName}}'s PicWords</h1>
+        <div *ngIf="loading && currentPWs.length==0" class="loading">
+            <div class="loading-img">
+                <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading gif">
+            </div>
+            <h3>Loading....</h3>
+        </div>
+        <app-picword *ngIf="currentPWs.length > 0" [picWords]="currentPWs" [flag]="'profile'"></app-picword>
+
+        <!--Variant 2-->
+        <a *ngIf="profilePWs.length != 0" (click)="moreSubmit()" class="btn next-btn">Show more</a>
+    </ng-template>
 
     <!-- <div class="profile-results">
             <Switch>

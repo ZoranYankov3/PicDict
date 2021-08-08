@@ -1,5 +1,74 @@
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
 :host {
     margin: 50px auto;
+}
+
+.pw-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+    min-height: 37rem;
+}
+
+.picwords label {
+    margin: 0.7rem;
+}
+
+.btn {
+    margin-top: 0;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75px;
+    height: 75px;
+    background: transparent;
+    margin-top: 100px;
+}
+
+.loading img {
+    width: 100%;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.prev-btn {
+    position: absolute;
+    left: 100px;
+    top: 50px;
+    margin: 0;
+}
+
+.next-btn {
+    position: absolute;
+    right: 100px;
+    top: 50px;
+    margin: 0;
+}
+
+.fa-greater-than,
+.fa-less-than {
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    margin: 0;
+    color: #f6c95b;
+    font-size: 50px;
+}
+
+.fa-greater-than {
+    right: 100px;
+}
+
+.fa-less-than {
+    left: 100px;
 }
 
 

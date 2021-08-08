@@ -47,6 +47,17 @@ const routes: Routes = [
   {
     path: 'auth/profile',
     component: ProfileComponent,
+    pathMatch: 'full',
+    canActivate: [
+      IsLogged
+    ],
+    data: {
+      paramsActivateRedirectUrl: '/'
+    }
+  },
+  {
+    path: 'auth/profile/:load',
+    component: ProfileComponent,
     canActivate: [
       IsLogged
     ],
@@ -57,7 +68,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class UserRoutingModule { }
