@@ -48,3 +48,22 @@
     background-color: #f6c95b;
     /* font-weight: bold; */
 }
+
+
+/* Dropdown styles */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 3;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    display: inline-block;
+    margin: 30px 10px 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
