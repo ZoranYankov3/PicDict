@@ -5,6 +5,7 @@ import { CreatePicwordComponent } from './create-picword/create-picword.componen
 import { FindPicwordComponent } from './find-picword/find-picword.component';
 import { PicwordDetailsComponent } from './picword-details/picword-details.component';
 import { PicwordListComponent } from './picword-list/picword-list.component';
+import { PicwordTestComponent } from './picword-test/picword-test.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
       IsLogged
     ],
     data: {
-      paramsActivateRedirectUrl: '/'
+      paramsActivateRedirectUrl: 'auth/login'
     },
   },
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
       IsLogged
     ],
     data: {
-      paramsActivateRedirectUrl: '/',
+      paramsActivateRedirectUrl: 'auth/login',
       flag: 'profile'
     },
   },
@@ -40,7 +41,7 @@ const routes: Routes = [
       IsLogged
     ],
     data: {
-      paramsActivateRedirectUrl: '/'
+      paramsActivateRedirectUrl: 'auth/login'
     },
   },
   {
@@ -52,6 +53,16 @@ const routes: Routes = [
     data: {
       paramsActivateRedirectUrl: '/',
       flag: 'find'
+    },
+  },
+  {
+    path: 'picword-test',
+    component: PicwordTestComponent,
+    canActivate: [
+      IsLogged
+    ],
+    data: {
+      paramsActivateRedirectUrl: '/'
     },
   },
   {
