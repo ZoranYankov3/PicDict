@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { error } from 'src/app/+state/notifyActions';
 import { IPW } from 'src/app/shared/interfaces/picword-interface';
 import { IPWRes } from 'src/app/shared/interfaces/picword-res-interface';
 import { PicwordsService } from '../picwords.service';
@@ -17,7 +15,6 @@ export class PicwordListComponent implements OnInit {
 
   constructor(
     private _picword: PicwordsService,
-    private _store: Store,
   ) { }
 
   ngOnInit(): void {
@@ -27,11 +24,12 @@ export class PicwordListComponent implements OnInit {
       .subscribe((response: any) => {
         // Convert IPWRes to IPW
         response = response.map((x: IPWRes) => ({ _id: x._id, word: x.word, pictureUrl: x.pictureUrl }));
+        console.log(response);
         this.picWords = response;
         this.currentPWs = response.slice(0, 6);
       },
         err => {
-          this._store.dispatch(error({ messages: err }));
+          // this.notificate = { type: 'error', messages: err };
         })
   }
 

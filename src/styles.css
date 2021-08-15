@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 html {
     box-sizing: border-box;
     text-align: center;
@@ -53,69 +52,4 @@ div.notify {
 
 span.error {
     color: red;
-}
-
-
-/* Loading styles */
-
-.loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-}
-
-.loading-img {
-    width: 75px;
-    height: 75px;
-    background: transparent;
-}
-
-.loading-img img {
-    width: 100%;
-}
-
-.section-title {
-    color: #887507;
-    font-size: 3rem;
-    text-transform: capitalize;
-    text-shadow: 1px 1px 3px #030307;
-}
-
-
-/* html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
-
-
-/* MatSnackBar */
-
-.green-snackbar {
-    /* background: rgb(65, 252, 134); */
-    background-color: rgb(19, 173, 76);
-    color: white;
-}
-
-.green-snackbar button {
-    background-color: rgb(19, 173, 76);
-    color: white;
-    border: none;
-}
-
-.mat-snack-bar-container {
-    margin-top: 40% !important;
-}
-
-.mat-simple-snackbar {
-    justify-content: center !important;
-}
-
-.red-snackbar {
-    background: #F44336;
-    color: white;
-}
-
-.red-snackbar button {
-    background-color: #F44336;
-    color: white !important;
-    border: none;
 }

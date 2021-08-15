@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { IsLogged, NotLogged } from './guards/auth.guard';
-// import { IsLogged } from './guards/is.logged';
-// import { NotLogged } from './guards/not.logged';
+import { IsLogged } from './guards/is.logged';
+import { NotLogged } from './guards/not.logged';
 import { Logout } from './guards/logout';
-// import { StateService } from './state.service';
+import { StateService } from './state.service';
 import { CorrectProfParam } from './guards/correctProfParam';
 
 
@@ -26,7 +25,7 @@ import { CorrectProfParam } from './guards/correctProfParam';
     FooterComponent
   ],
   providers:[
-    // StateService,
+    StateService,
     IsLogged,
     NotLogged,
     CorrectProfParam,

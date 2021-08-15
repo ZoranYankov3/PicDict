@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CorrectProfParam } from '../core/guards/correctProfParam';
-import { IsLogged, NotLogged } from '../core/guards/auth.guard';
-// import { IsLogged } from '../core/guards/is.logged';
+import { IsLogged } from '../core/guards/is.logged';
 import { Logout } from '../core/guards/logout';
-// import { NotLogged } from '../core/guards/not.logged';
+import { NotLogged } from '../core/guards/not.logged';
 import { HomeComponent } from '../home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
-import { ProfileResultsComponent } from './profile/profile-results/profile-results.component';
-import { ProfilePicwordsComponent } from './profile/profile-picwords/profile-picwords.component';
 
 const routes: Routes = [
   {
@@ -57,26 +54,6 @@ const routes: Routes = [
     path: 'auth/profile',
     component: ProfileComponent,
     pathMatch: 'full',
-    canActivate: [
-      IsLogged
-    ],
-    data: {
-      paramsActivateRedirectUrl: '/'
-    }
-  },
-  {
-    path: 'auth/profile/picwords',
-    component: ProfilePicwordsComponent,
-    canActivate: [
-      IsLogged
-    ],
-    data: {
-      paramsActivateRedirectUrl: '/'
-    }
-  },
-  {
-    path: 'auth/profile/results',
-    component: ProfileResultsComponent,
     canActivate: [
       IsLogged
     ],

@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { login } from '../+state/authActions';
-import { initialState } from '../+state/authReducers';
-import { ConfigService } from '../config/config';
+import { ConfigService } from '../config/config.service';
+import { StateService } from '../core/state.service';
 import { INewUser } from '../shared/interfaces/new-user-interface';
 import { IRegResponse } from '../shared/interfaces/register-response-interface';
 import { HelpService } from '../shared/services/help.service';
@@ -26,16 +24,19 @@ export class AuthService {
     private _http: HttpClient,
     private _errorService: HelpService,
     private _router: Router,
-    private _store: Store
+    private _stateService: StateService
   ) {
     this.isLoggedIn$ = this.currentUser$.pipe(map(user => {
+      console.log(user);
+      console.log(!!user);
       return !!user;
     }));
     this.isNotLoggedIn$ = this.isLoggedIn$.pipe(map(isLoggedIn => !isLoggedIn));
    }
 
   register(username: string, password: string) {
-    return this._http.post<IRegResponse>(this._config.SERVER_AUTH_URL('register'), { username, password })
+    // console.log('in client register');
+    return this._http.post<INewUser>(this._config.SERVER_AUTH_URL('register'), { username: username, password: password })
       .pipe(
         catchError(err => {
           console.log(err);
@@ -43,8 +44,7 @@ export class AuthService {
         }),
         tap(res => {
           console.log(res);
-          let user:INewUser = {_id: res.user._id, username: res.user.username, picture: res.user.picture, token: res.token}
-          this.authenticateUser(user);
+          this.authenticateUser(res);
           this._router.navigateByUrl('');
         })
       )
@@ -52,11 +52,13 @@ export class AuthService {
 
   verify(user: INewUser) {
     let verifyData = { username: user.username, token: user.token }
+    console.log(verifyData);
+    
+    // console.log('in client verify');
     return this._http.post<any>(this._config.SERVER_AUTH_URL('verify'), verifyData)
       .pipe(
         catchError(err => {
           console.log(err);
-          localStorage.removeItem('sid');
           this.currentUser.next(null);
           return this._errorService.handleError(err);
         }),
@@ -74,6 +76,7 @@ export class AuthService {
           return this._errorService.handleError(err);
         }),
         tap(res => {
+          console.log(res);
           let user:INewUser = {_id: res.user._id, username: res.user.username, picture: res.user.picture, token: res.token}
           this.authenticateUser(user);
           this._router.navigateByUrl('');
@@ -84,6 +87,8 @@ export class AuthService {
   getLoggedUserName() {
     let cookie = localStorage.getItem('sid');
     let { username } = cookie ? JSON.parse(cookie) : { username: '' };
+    console.log(username);
+    // console.log(cookie);
     return username;
   }
 
@@ -91,6 +96,7 @@ export class AuthService {
     let storage = localStorage.getItem('sid');
     let currentStorage = storage ? JSON.parse(storage) : null;
     let { _id } = currentStorage || { _id: null };
+    // console.log(_token);
     return _id;
   }
   
@@ -99,7 +105,7 @@ export class AuthService {
     try {
       let {username, token } = storage && JSON.parse(storage) ? JSON.parse(storage) : { username: '', token: '' };
       if (!storage || !username || !token) {
-        this.authenticateUser(null);
+        // this._auth.authenticateUser(null);
         throw new Error('Invalid Token');
       }
     } catch (error) {
@@ -111,15 +117,12 @@ export class AuthService {
     let {username, token } = currentStorage || {username: '', token: null };
     return {username, token};
   }
-
   getLoggedUserToken = () => {
     let storage = localStorage.getItem('sid');
     try {
       let { token } = storage && JSON.parse(storage) ? JSON.parse(storage) : { token: '' };
       if (!storage || !token) {
-        console.log('InvalidToken');
-        
-        this.authenticateUser(null);
+        // this._auth.authenticateUser(null);
         throw new Error('Invalid Token');
       }
     } catch (error) {
@@ -133,11 +136,9 @@ export class AuthService {
   }
 
   public authenticateUser(user: INewUser | null) {
-    console.log(user);
     // const expirationDate = new Date(new Date().getTime() + expiresIn*1000);
-    this._store.dispatch(login(user ? {user} : { user: initialState}))
     this.currentUser.next(user);
     if(user) {localStorage.setItem('sid', JSON.stringify(user));}
-    // this._stateService.setState({isAuthName: user?.username || '', isLogged: true, isAuthorized: true});
+    this._stateService.setState({isAuthName: user?.username || '', isLogged: true, isAuthorized: true});
   }
 }

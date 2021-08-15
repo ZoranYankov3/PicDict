@@ -3,13 +3,13 @@
         <img class="create-question-logo" />
     </div>
     <form #form="ngForm" class="create-question-form" (ngSubmit)="onCreateSubmit(form)">
-        <h1 class="section-title">Create new PicWord</h1>
+        <h1 class="create-question-title">Create new PicWord</h1>
         <label>
             Write the word: 
             <input disabled="{{action == 'Delete'}}"
             type="text"
             class="form-control text"
-            placeholder="Write the word to search..."
+            placeholder="Car"
             name="word"
             #word="ngModel"
             [ngModel]="pexelWord.word"
@@ -22,7 +22,7 @@
             </div>
         </div>
         <label for="correct_answer">
-            Enter picture's URL: 
+            Choose the picture: 
             <input disabled="{{action == 'Delete'}}"
             type="url"
             class="form-control url"
