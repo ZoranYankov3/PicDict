@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IsLogged } from '../core/guards/is.logged';
+import { IsLogged } from '../core/guards/auth.guard';
+// import { IsLogged } from '../core/guards/is.logged';
 import { CreatePicwordComponent } from './create-picword/create-picword.component';
 import { FindPicwordComponent } from './find-picword/find-picword.component';
 import { PicwordDetailsComponent } from './picword-details/picword-details.component';
@@ -23,17 +24,17 @@ const routes: Routes = [
       paramsActivateRedirectUrl: 'auth/login'
     },
   },
-  {
-    path: 'pw/user-pwList/:userId',
-    component: PicwordListComponent,
-    canActivate: [
-      IsLogged
-    ],
-    data: {
-      paramsActivateRedirectUrl: 'auth/login',
-      flag: 'profile'
-    },
-  },
+  // {
+  //   path: 'pw/user-pwList/:userId',
+  //   component: PicwordListComponent,
+  //   canActivate: [
+  //     IsLogged
+  //   ],
+  //   data: {
+  //     paramsActivateRedirectUrl: 'auth/login',
+  //     flag: 'profile'
+  //   },
+  // },
   {
     path: 'pw/create-picword',
     component: CreatePicwordComponent,

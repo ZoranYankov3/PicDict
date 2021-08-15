@@ -10,7 +10,12 @@ import { SharedModule } from './shared/shared.module';
 import { PicwordsModule } from './picwords/picwords.module';
 import { UserModule } from './user/user.module';
 import { HomeComponent } from './home/home.component';
-import { ConfigService } from './config/config.service';
+import { ConfigService } from './config/config';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './+state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import { ConfigService } from './config/config.service';
     PicwordsModule,
     UserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSnackBarModule,
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({ }),
+    BrowserAnimationsModule
+    // StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [ConfigService],
   bootstrap: [AppComponent]

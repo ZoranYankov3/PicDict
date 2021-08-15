@@ -10,6 +10,9 @@ import { SharedModule } from '../shared/shared.module';
 import { HelpService } from '../shared/services/help.service';
 import { PicwordsModule } from '../picwords/picwords.module';
 import { PassMatchDirective } from './pass-match.directive';
+import { ProfileResultsComponent } from './profile/profile-results/profile-results.component';
+import { ProfilePicwordsComponent } from './profile/profile-picwords/profile-picwords.component';
+import { TableComponent } from './profile/table/table.component';
 
 
 
@@ -18,7 +21,10 @@ import { PassMatchDirective } from './pass-match.directive';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    PassMatchDirective
+    PassMatchDirective,
+    ProfileResultsComponent,
+    ProfilePicwordsComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,

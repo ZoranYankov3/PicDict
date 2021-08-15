@@ -1,5 +1,5 @@
 <div class="auth-container">
-    <h1>Register page</h1>
+    <h1 class="section-title">Register page</h1>
     <form #form="ngForm" class="form-container" id="register-form" (ngSubmit)="registerSubmit(form)">
         <!-- <div class="form-group">
             <label htmlFor="email">Email</label>
@@ -32,6 +32,8 @@
                 <div *ngIf="rePassword.touched && password.touched">
                     <span *ngIf="rePassword.errors?.required" class="error">Repeat Password is required</span>
                     <span *ngIf="rePassword.errors?.minlength" class="error">Repeat Password must be at least 7</span>
+                </div>
+                <div *ngIf="rePassword.touched && password.touched">
                     <span *ngIf="rePassword.errors?.passMissmatch" class="error">Both password must match</span>
                 </div>
             </div>

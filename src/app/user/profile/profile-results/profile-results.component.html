@@ -1,0 +1,17 @@
+<div class="profile-content">
+    <h1 class="section-title">{{userName}}'s Results</h1>
+    <div *ngIf="loading && allResults.length==0" class="loading">
+        <div class="loading-img">
+            <img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading gif">
+        </div>
+        <h3>Loading....</h3>
+    </div>
+    <ul *ngIf="allResults">
+        <li *ngFor="let result of allResults">
+            <div class="result" (click)="toggleTable($event)">
+                <p>Results from {{result.createdAt | date: 'd/MMM/y - h:mm:ss a'}}</p>
+                <app-table [style.display]="'none'" [current]="result" [totalScore]="result.score"></app-table>
+            </div>
+        </li>
+    </ul>
+</div>

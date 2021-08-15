@@ -1,0 +1,7 @@
+.profile-content {
+    padding: 1rem 0rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 45rem;
+}

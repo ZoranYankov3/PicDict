@@ -1,0 +1,26 @@
+.profile-content {
+    padding: 1rem 0rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 45rem;
+}
+
+ul {
+    list-style: none;
+}
+
+div.result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 70vw;
+    min-height: 30px;
+    width: fit-content;
+    height: fit-content;
+    margin: 10px;
+    background-color: rgb(194, 194, 194);
+    box-shadow: 2px 3px 10px 0px #bda105;
+    border-radius: 5px;
+}
