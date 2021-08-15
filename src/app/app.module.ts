@@ -13,7 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { ConfigService } from './config/config';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers } from './+state';
+import { reducer } from './+state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
@@ -24,7 +24,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HomeComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, 
     CoreModule,
     SharedModule,
     PicwordsModule,
@@ -32,7 +32,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     AppRoutingModule,
     MatSnackBarModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrument({ }),
     BrowserAnimationsModule
     // StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })

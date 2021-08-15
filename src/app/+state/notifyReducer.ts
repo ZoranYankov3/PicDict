@@ -1,4 +1,3 @@
-import { createReducer, on } from '@ngrx/store';
 import { INotifyState } from '../shared/interfaces/notify-state-interface';
 import { error, success } from './notifyActions';
 
@@ -7,8 +6,13 @@ export const initialState: INotifyState = {
     messages: [{message: ''}],
 }
 
-export const notifyReducer = createReducer(
-    initialState,
-    on(error, (state, { messages }) => ({ ...state, type: 'error', messages: messages })),
-    on(success, (state, { messages }) => ({ ...state, type: 'success', messages: messages })),
-)
+export function notifyReducer(state: Page[], action: Action): Page[] {
+    switch (action.type) {
+        case "error":
+            return error.payload;
+        case "success":
+            return success.payload;
+        default:
+            return state;
+    }
+}
